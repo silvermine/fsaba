@@ -1,0 +1,6 @@
+node_modules
+dist
+
+# vim tmp files
+*.swp
+*.un~

@@ -1,0 +1,24 @@
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Browserify Example</title>
+      <script src="../../dist/fsaba.standalone.min.js"></script>
+   </head>
+   <body>
+      <h1>Example Page</h1>
+      <h2>Permissions</h2>
+      <ul>
+         <li>category:edit</li>
+         <li>category:view</li>
+      </ul>
+      <h2>Results</h2>
+      <p>You should see true or false. If you see '???' it's not working.</p>
+      <p>isPermitted('category:view') = <span id="a1">???</span>
+      <p>isPermitted('category:delete') = <span id="a2">???</span>
+      <script>
+         var auth = fsaba.considerPermissions(['category:edit', 'category:view']);
+         document.getElementById('a1').innerHTML = auth.isPermitted('category:view');
+         document.getElementById('a2').innerHTML = auth.isPermitted('category:delete');
+      </script>
+   </body>
+</html>

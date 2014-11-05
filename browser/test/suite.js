@@ -1,2 +1,1 @@
-require('../../test/one.js');
-require('../../test/two.js');
+require('../../test/basic.js');

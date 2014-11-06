@@ -28,7 +28,7 @@ module.exports = function(grunt) {
             options: {
                reporter: 'spec'
             },
-            src: ['test/**/*.js']
+            src: ['src/test/**/*.js']
          }
       },
 
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
          // usages in browser/example/index.html (script tag) and
          // browser/example/index-require.html (RequireJS).
          standalone: {
-            src: [ '<%= pkg.name %>.js' ],
+            src: [ './src/<%= pkg.name %>.js' ],
             dest: './dist/<%= pkg.name %>.standalone.js',
             options: {
                standalone: '<%= pkg.name %>'
@@ -57,10 +57,10 @@ module.exports = function(grunt) {
          // have been created with an --external parameter. See
          // browser/test/index.html for an example.
          require: {
-            src: [ '<%= pkg.name %>.js' ],
+            src: [ './src/<%= pkg.name %>.js' ],
             dest: './dist/<%= pkg.name %>.require.js',
             options: {
-               alias: [ './<%= pkg.name %>.js:' ]
+               alias: [ './src/<%= pkg.name %>.js:' ]
             }
          },
          // These are the browserified tests. We need to browserify the tests to be

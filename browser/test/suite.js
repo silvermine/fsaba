@@ -1,1 +1,1 @@
-require('../../test/basic.js');
+require('../../src/test/basic.js');

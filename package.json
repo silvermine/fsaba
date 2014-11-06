@@ -7,7 +7,7 @@
    "scripts": {
       "test": "grunt"
    },
-   "main": "./fsaba",
+   "main": "./src/fsaba",
    "dependencies": {
       "underscore": "~1.7.0"
    },

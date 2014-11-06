@@ -1,6 +1,13 @@
 Full Stack Action Based Authorization
 =====================================================
 
+[![Build Status](https://travis-ci.org/silvermine/fsaba.png?branch=master)](https://travis-ci.org/silvermine/fsaba)
+[![Dependency Status](https://david-dm.org/silvermine/fsaba.png)](https://david-dm.org/silvermine/fsaba)
+[![Dev Dependency Status](https://david-dm.org/silvermine/fsaba/dev-status.png)](https://david-dm.org/silvermine/fsaba#info=devDependencies&view=table)
+
+[![Browser Support](https://ci.testling.com/silvermine/fsaba.png)](https://ci.testling.com/silvermine/fsaba)
+
+
 What?
 -------------
 
@@ -16,4 +23,4 @@ Because we need it.
 License
 -------
 
-TODO
+This software is released under the MIT license. See [the license file](LICENSE) for more details.

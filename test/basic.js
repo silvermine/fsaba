@@ -2,7 +2,7 @@ var fsaba = require('../fsaba'),
     chai = require('chai'),
     expect = chai.expect;
 
-describe('exact match permissions', function() {
+describe('fsaba: exact match permissions', function() {
    var permissions = [ 'category:edit', 'category:view' ];
 
    it('should permit when matching exactly', function() {
@@ -14,7 +14,7 @@ describe('exact match permissions', function() {
    });
 });
 
-describe('multiple values can be matched', function() {
+describe('fsaba: multiple values can be matched', function() {
    var permissions = [ 'category:edit,view' ];
 
    it('should expand the list', function() {
@@ -23,7 +23,7 @@ describe('multiple values can be matched', function() {
    });
 });
 
-describe('wildcard values can be matched', function() {
+describe('fsaba: wildcard values can be matched', function() {
    var permissions = [ 'category:*' ];
 
    it('should expand the list', function() {
@@ -33,7 +33,7 @@ describe('wildcard values can be matched', function() {
    });
 });
 
-describe('instance level controls', function() {
+describe('fsaba: instance level controls', function() {
    it('does exact matches', function() {
       var permissions = [ 'printer:query:lp7200' ];
       expect(fsaba.considerPermissions(permissions).isPermitted('printer:query:lp7200')).to.equal(true);
@@ -81,7 +81,7 @@ describe('instance level controls', function() {
    });
 });
 
-describe('missing parts in actions', function() {
+describe('fsaba: missing parts in actions', function() {
    var permissions = [ 'printer:print,query' ];
 
    it('does allow missing parts of action', function() {

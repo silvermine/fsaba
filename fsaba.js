@@ -1,13 +1,16 @@
-var parser = require('./lib/parser');
+var PermissionLevel = require('./lib/PermissionLevel');
 
 module.exports = {
 
    considerSubject: function(user) {
-      return this.considerPermissions(user.permissions);
+      user = user || {};
+      return this.considerPermissions(user.permissions || []);
    },
 
    considerPermissions: function(permissions) {
-      return parser.parse(permissions);
+      var root = new PermissionLevel();
+      root.init(permissions);
+      return root.toAuthObject();
    }
 
 };

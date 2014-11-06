@@ -5,8 +5,6 @@ Full Stack Action Based Authorization
 [![Dependency Status](https://david-dm.org/silvermine/fsaba.png)](https://david-dm.org/silvermine/fsaba)
 [![Dev Dependency Status](https://david-dm.org/silvermine/fsaba/dev-status.png)](https://david-dm.org/silvermine/fsaba#info=devDependencies&view=table)
 
-[![Browser Support](https://ci.testling.com/silvermine/fsaba.png)](https://ci.testling.com/silvermine/fsaba)
-
 
 What?
 -------------

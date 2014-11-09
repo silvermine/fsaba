@@ -31,6 +31,18 @@ describe('fsaba: wildcard values can be matched', function() {
       expect(fsaba.considerPermissions(permissions).isPermitted('category:delete')).to.equal(true);
       expect(fsaba.considerPermissions(permissions).isPermitted('user:delete')).to.equal(false);
    });
+
+   it('should work with a root-level wildcard', function() {
+      expect(fsaba.considerPermissions([ '*' ]).isPermitted('category:view:123')).to.equal(true);
+      expect(fsaba.considerPermissions([ '*' ]).isPermitted('category:delete:123')).to.equal(true);
+      expect(fsaba.considerPermissions([ '*' ]).isPermitted('user:delete:123')).to.equal(true);
+   });
+
+   it('should work with a root-level wildcard and other permissions', function() {
+      expect(fsaba.considerPermissions([ '*', 'category:view' ]).isPermitted('category:view:123')).to.equal(true);
+      expect(fsaba.considerPermissions([ '*', 'category:view' ]).isPermitted('category:delete:123')).to.equal(true);
+      expect(fsaba.considerPermissions([ '*', 'category:view' ]).isPermitted('user:delete:123')).to.equal(true);
+   });
 });
 
 describe('fsaba: instance level controls', function() {

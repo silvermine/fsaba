@@ -39,7 +39,7 @@ PermissionLevel.prototype = {
 
    isPermitted: function(pieces) {
       var first = pieces[0],
-          nextLevel = this.permissions[first] || this.permissions[WILDCARD];
+          nextLevel = this.permissions[WILDCARD] || this.permissions[first];
 
       if (!nextLevel) {
          return false;

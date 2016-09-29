@@ -1,6 +1,6 @@
 {
    "name": "fsaba",
-   "version": "0.1.1",
+   "version": "0.1.2",
    "author": "Jeremy Thomerson",
    "description": "action-based authorization for both node.js and browser applications",
    "repository": "https://github.com/silvermine/fsaba.git",

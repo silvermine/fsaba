@@ -11,7 +11,10 @@ _.mixin({
                   memo[key] = endValue;
                } else {
                   memo[key] = (memo[key] || []);
-                  memo[key].push(row.slice(1));
+
+                  if (_.isArray(memo[key])) {
+                     memo[key].push(row.slice(1));
+                  }
                }
             });
             return memo;

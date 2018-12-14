@@ -14,6 +14,9 @@
     <script src="../../node_modules/mocha/mocha.js"></script>
     <script>
       'use strict';
+      if (typeof window.initMochaPhantomJS === 'function') {
+         window.initMochaPhantomJS()
+      }
       mocha.setup('bdd')
       mocha.slow(500)
       mocha.timeout(3000)

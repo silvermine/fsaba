@@ -1,7 +1,13 @@
----
 language: node_js
 node_js:
-   - '0.10'
+  - "node" # Latest node version
+  - "lts/*" # Latest LTS version
+  - "10"
+  - "8"
+  - "8.10"
+  - "6"
+
+before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6.4.1; fi
 
 before_script:
    - npm install -g grunt-cli

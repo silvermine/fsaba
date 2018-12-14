@@ -1,9 +1,9 @@
 Full Stack Action Based Authorization
 =====================================================
 
-[![Build Status](https://travis-ci.org/silvermine/fsaba.png?branch=master)](https://travis-ci.org/silvermine/fsaba)
-[![Dependency Status](https://david-dm.org/silvermine/fsaba.png)](https://david-dm.org/silvermine/fsaba)
-[![Dev Dependency Status](https://david-dm.org/silvermine/fsaba/dev-status.png)](https://david-dm.org/silvermine/fsaba#info=devDependencies&view=table)
+[![Build Status](https://travis-ci.org/silvermine/fsaba.svg?branch=master)](https://travis-ci.org/silvermine/fsaba)
+[![Dependency Status](https://david-dm.org/silvermine/fsaba.svg)](https://david-dm.org/silvermine/fsaba)
+[![Dev Dependency Status](https://david-dm.org/silvermine/fsaba/dev-status.svg)](https://david-dm.org/silvermine/fsaba#info=devDependencies&view=table)
 
 
 What?

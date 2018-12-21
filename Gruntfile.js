@@ -47,20 +47,20 @@ module.exports = function(grunt) {
          // usages in browser/example/index.html (script tag) and
          // browser/example/index-require.html (RequireJS).
          standalone: {
-            src: [ './src/<%= pkg.name %>.js' ],
-            dest: './dist/<%= pkg.name %>.standalone.js',
+            src: [ './src/fsaba.js' ],
+            dest: './dist/fsaba.standalone.js',
             options: {
-               standalone: '<%= pkg.name %>'
+               standalone: 'fsaba'
             }
          },
          // This browserify build can be required by other browserify modules that
          // have been created with an --external parameter. See
          // browser/test/index.html for an example.
          require: {
-            src: [ './src/<%= pkg.name %>.js' ],
-            dest: './dist/<%= pkg.name %>.require.js',
+            src: [ './src/fsaba.js' ],
+            dest: './dist/fsaba.require.js',
             options: {
-               alias: [ './src/<%= pkg.name %>.js:' ]
+               alias: [ './src/fsaba.js:' ]
             }
          },
          // These are the browserified tests. We need to browserify the tests to be
@@ -72,7 +72,7 @@ module.exports = function(grunt) {
             src: [ 'browser/test/suite.js' ],
             dest: './dist/test/browserified_tests.js',
             options: {
-               external: [ './<%= pkg.name %>.js' ],
+               external: [ './fsaba.js' ],
                // Embed source map for tests
                debug: true
             }
@@ -83,9 +83,9 @@ module.exports = function(grunt) {
       uglify: {
          dist: {
             files: {
-               'dist/<%= pkg.name %>.standalone.min.js':
+               'dist/fsaba.standalone.min.js':
                      ['<%= browserify.standalone.dest %>'],
-               'dist/<%= pkg.name %>.require.min.js':
+               'dist/fsaba.require.min.js':
                      ['<%= browserify.require.dest %>'],
             }
          }

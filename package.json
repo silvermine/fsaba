@@ -6,7 +6,7 @@
    "description": "action-based authorization for both node.js and browser applications",
    "repository": "https://github.com/silvermine/fsaba.git",
    "scripts": {
-      "test": "grunt"
+      "test": "check-node-version --npm 6.14.12 && grunt"
    },
    "main": "./src/fsaba",
    "dependencies": {
@@ -15,6 +15,7 @@
    "devDependencies": {
       "browserify": "16.2.3",
       "chai": "4.2.0",
+      "check-node-version": "4.1.0",
       "grunt": "1.0.3",
       "grunt-browserify": "5.3.0",
       "grunt-contrib-clean": "2.0.0",
@@ -28,8 +29,5 @@
       "sinon": "7.2.2",
       "sinon-chai": "3.3.0"
    },
-   "browser": {},
-   "engines": {
-      "node": ">= 0.10.x"
-   }
+   "browser": {}
 }

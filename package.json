@@ -1,6 +1,6 @@
 {
    "name": "fsaba",
-   "version": "0.2.0",
+   "version": "0.2.1",
    "author": "Jeremy Thomerson",
    "license": "MIT",
    "description": "action-based authorization for both node.js and browser applications",

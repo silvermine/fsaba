@@ -1,33 +1,67 @@
 {
-   "name": "fsaba",
-   "version": "0.2.1",
+   "name": "@silvermine/fsaba",
+   "version": "0.9.0",
+   "description": "",
+   "main": "./dist/commonjs/index",
+   "types": "./dist/types/index.d.ts",
+   "module": "./dist/esm/index",
+   "scripts": {
+      "commitlint": "commitlint --from d4ecfbb",
+      "prepare": "grunt build",
+      "test": "check-node-version --npm 6.14.12 --print && TS_NODE_PROJECT='tests/tsconfig.json' TS_NODE_FILES=true nyc mocha --opts ./.mocha.opts",
+      "test:ci": "npm test -- --forbid-only",
+      "standards": "npm run commitlint && grunt standards"
+   },
    "author": "Jeremy Thomerson",
    "license": "MIT",
-   "description": "action-based authorization for both node.js and browser applications",
-   "repository": "https://github.com/silvermine/fsaba.git",
-   "scripts": {
-      "test": "check-node-version --npm 6.14.12 && grunt"
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/silvermine/fsaba.git"
    },
-   "main": "./src/fsaba",
-   "dependencies": {
-      "underscore": "1.13.1"
+   "bugs": {
+      "url": "https://github.com/silvermine/fsaba/issues"
    },
+   "homepage": "https://github.com/silvermine/fsaba#readme",
    "devDependencies": {
-      "browserify": "16.2.3",
-      "chai": "4.2.0",
+      "@commitlint/cli": "13.1.0",
+      "@commitlint/config-conventional": "13.1.0",
+      "@commitlint/travis-cli": "13.1.0",
+      "@silvermine/chai-strictly-equal": "1.1.0",
+      "@silvermine/eslint-config": "3.0.1",
+      "@silvermine/standardization": "1.1.0",
+      "@silvermine/typescript-config": "0.10.0",
+      "@types/chai": "4.2.21",
+      "@types/mocha": "9.0.0",
+      "@types/node": "16.4.13",
+      "@types/sinon": "10.0.2",
+      "chai": "4.3.4",
       "check-node-version": "4.1.0",
-      "grunt": "1.4.0",
-      "grunt-browserify": "5.3.0",
+      "coveralls": "3.1.1",
+      "cz-conventional-changelog": "3.3.0",
+      "grunt": "1.4.1",
+      "grunt-cli": "1.4.3",
+      "grunt-concurrent": "3.0.0",
       "grunt-contrib-clean": "2.0.0",
-      "grunt-contrib-connect": "2.0.0",
-      "grunt-contrib-jshint": "2.0.0",
-      "grunt-contrib-uglify": "4.0.0",
       "grunt-contrib-watch": "1.1.0",
-      "grunt-mocha-phantomjs": "4.0.0",
-      "grunt-mocha-test": "0.13.3",
+      "grunt-eslint": "23.0.0",
+      "grunt-exec": "3.0.0",
       "mocha": "5.2.0",
-      "sinon": "7.2.2",
-      "sinon-chai": "3.3.0"
+      "nyc": "15.1.0",
+      "sinon": "11.1.2",
+      "source-map-support": "0.5.19",
+      "standard-version": "9.3.1",
+      "ts-loader": "9.2.5",
+      "ts-node": "10.1.0",
+      "typescript": "4.3.5",
+      "webpack": "5.49.0",
+      "webpack-cli": "4.7.2"
    },
-   "browser": {}
+   "dependencies": {
+      "tslib": "2.3.0"
+   },
+   "config": {
+      "commitizen": {
+         "path": "./node_modules/cz-conventional-changelog"
+      }
+   }
 }

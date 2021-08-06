@@ -1,0 +1,6 @@
+{
+   "extends": "@silvermine/typescript-config/browser/tsconfig.commonjs.json",
+   "compilerOptions": {
+      "outDir": "../dist/commonjs/"
+   }
+}

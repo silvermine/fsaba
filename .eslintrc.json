@@ -1,0 +1,9 @@
+{
+
+   "extends": "@silvermine/eslint-config/node",
+
+   "rules": {
+      "@typescript-eslint/no-type-alias": "off"
+   }
+
+}

@@ -18,6 +18,11 @@ export enum PolicyEffect {
  * evaluated after actions and resources, so a condition will not be evaluated if the
  * action and resource do not already match.
  *
+ * If multiple conditions are provided, they are joined with an "AND". That is, all the
+ * conditions in the array must match. For more complex conjunctions (i.e. to use "OR" for
+ * conditions where _any_ of a set of conditions match, or to combine AND and OR clauses),
+ * use `{ allOf: PolicyCondition[] }` and `{ anyOf: PolicyCondition[] }`.
+ *
  * The context available for use in conditions varies for each action.
  */
 export type PolicyCondition = PolicyConditionMatcher | PolicyConditionConjunction;

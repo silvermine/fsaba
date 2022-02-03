@@ -15,7 +15,7 @@ export class SubjectAuthorizer implements ISubjectAuthorizer {
 
    private _policies: { deny: PolicyWithID[]; allow: PolicyWithID[] } = { deny: [], allow: [] };
 
-   public constructor(allRoles: RoleDefinition[], claims: Claims, opts?: Partial<ISubjectAuthorizerOpts>) {
+   public constructor(allRoles: readonly RoleDefinition[], claims: Claims, opts?: Partial<ISubjectAuthorizerOpts>) {
       const policies = claims.roles
          .map((roleClaim) => {
             const role = allRoles.find((r) => { return r.roleID === roleClaim.roleID; });

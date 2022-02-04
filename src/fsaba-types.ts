@@ -135,13 +135,13 @@ export interface Policy {
    /**
     * What action(s) are allowed or disallowed by this policy?
     */
-   actions: string[];
+   actions: readonly string[];
 
    /**
     * On which resource(s) does this policy grant (or deny) permission to perform those
     * actions?
     */
-   resources: string[];
+   resources: readonly string[];
 
    /**
     * Are there any conditions that must apply to the contextual data about the action for
@@ -180,7 +180,7 @@ export interface RoleDefinition {
    /**
     * The policies this role includes.
     */
-   policies: Policy[];
+   policies: readonly Policy[];
 }
 
 
@@ -224,7 +224,7 @@ export interface Claims {
     * Role claims grant a user access to roles, and are thus used to build the complete
     * policyset by which the user's permissions are evaluated.
     */
-   roles: RoleClaim[];
+   roles: readonly RoleClaim[];
 }
 
 /**

@@ -3,9 +3,9 @@ import { SubjectAuthorizer } from './SubjectAuthorizer';
 
 export class AuthorizerFactory implements IAuthorizerFactory {
 
-   private _allRoles: RoleDefinition[];
+   private _allRoles: readonly RoleDefinition[];
 
-   public constructor(allRoles: RoleDefinition[]) {
+   public constructor(allRoles: readonly RoleDefinition[]) {
       this._allRoles = allRoles;
    }
 

@@ -10,7 +10,12 @@
       "prepare": "grunt build",
       "test": "check-node-version --npm 6.14.12 --print && TS_NODE_PROJECT='tests/tsconfig.json' TS_NODE_FILES=true nyc mocha --opts ./.mocha.opts",
       "test:ci": "npm test -- --forbid-only",
-      "standards": "npm run commitlint && grunt standards"
+      "eslint": "eslint '{,!(node_modules|dist)/**/}*.js'",
+      "markdownlint": "markdownlint -c .markdownlint.json -i CHANGELOG.md '{,!(node_modules)/**/}*.md'",
+      "standards": "npm run markdownlint && npm run eslint",
+      "release:preview": "node ./node_modules/@silvermine/standardization/scripts/release.js preview",
+      "release:prep-changelog": "node ./node_modules/@silvermine/standardization/scripts/release.js prep-changelog",
+      "release:finalize": "node ./node_modules/@silvermine/standardization/scripts/release.js finalize"
    },
    "author": "Jeremy Thomerson",
    "license": "MIT",
@@ -23,27 +28,22 @@
    },
    "homepage": "https://github.com/silvermine/fsaba#readme",
    "devDependencies": {
-      "@commitlint/cli": "13.1.0",
-      "@commitlint/config-conventional": "13.1.0",
-      "@commitlint/travis-cli": "13.1.0",
       "@silvermine/chai-strictly-equal": "1.1.0",
       "@silvermine/eslint-config": "3.0.1",
-      "@silvermine/standardization": "1.1.0",
+      "@silvermine/standardization": "2.0.0",
       "@silvermine/typescript-config": "0.10.0",
       "@types/chai": "4.2.21",
       "@types/mocha": "9.0.0",
       "@types/node": "16.4.13",
       "@types/sinon": "10.0.2",
       "chai": "4.3.4",
-      "check-node-version": "4.1.0",
       "coveralls": "3.1.1",
-      "cz-conventional-changelog": "3.3.0",
+      "eslint": "6.8.0",
       "grunt": "1.4.1",
       "grunt-cli": "1.4.3",
       "grunt-concurrent": "3.0.0",
       "grunt-contrib-clean": "2.0.0",
       "grunt-contrib-watch": "1.1.0",
-      "grunt-eslint": "23.0.0",
       "grunt-exec": "3.0.0",
       "mocha": "5.2.0",
       "nyc": "15.1.0",
@@ -53,16 +53,11 @@
       "ts-loader": "9.2.5",
       "ts-node": "10.1.0",
       "typescript": "4.3.5",
-      "webpack": "5.49.0",
-      "webpack-cli": "4.7.2"
+      "webpack": "5.72.1",
+      "webpack-cli": "4.9.2"
    },
    "dependencies": {
       "@silvermine/toolbox": "0.1.0",
       "tslib": "2.3.0"
-   },
-   "config": {
-      "commitizen": {
-         "path": "./node_modules/cz-conventional-changelog"
-      }
    }
 }

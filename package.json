@@ -8,7 +8,7 @@
    "scripts": {
       "commitlint": "commitlint --from d4ecfbb",
       "prepare": "grunt build",
-      "test": "npm run check-node-version && TS_NODE_PROJECT='tests/tsconfig.json' TS_NODE_FILES=true nyc mocha --opts ./.mocha.opts",
+      "test": "TS_NODE_PROJECT='tests/tsconfig.json' TS_NODE_FILES=true nyc mocha --opts ./.mocha.opts",
       "check-node-version": "check-node-version --npm 10.5.0 --print",
       "test:ci": "npm test -- --forbid-only",
       "eslint": "eslint '{,!(node_modules|dist)/**/}*.js'",

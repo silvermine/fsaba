@@ -8,8 +8,8 @@
    "scripts": {
       "commitlint": "commitlint --from d4ecfbb",
       "prepare": "grunt build",
-      "test": "npm run check-node-version && TS_NODE_PROJECT='tests/tsconfig.json' TS_NODE_FILES=true nyc mocha --opts ./.mocha.opts",
-      "check-node-version": "check-node-version --npm 8.5.5 --print",
+      "test": "TS_NODE_PROJECT='tests/tsconfig.json' TS_NODE_FILES=true nyc mocha --opts ./.mocha.opts",
+      "check-node-version": "check-node-version --npm 10.5.0 --print",
       "test:ci": "npm test -- --forbid-only",
       "eslint": "eslint '{,!(node_modules|dist)/**/}*.js'",
       "markdownlint": "markdownlint -c .markdownlint.json -i CHANGELOG.md '{,!(node_modules)/**/}*.md'",
@@ -58,7 +58,7 @@
       "webpack-cli": "4.9.2"
    },
    "dependencies": {
-      "@silvermine/toolbox": "0.1.0",
+      "@silvermine/toolbox": "0.3.0",
       "tslib": "2.3.0"
    }
 }

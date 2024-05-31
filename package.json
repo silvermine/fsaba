@@ -29,7 +29,7 @@
    },
    "homepage": "https://github.com/silvermine/fsaba#readme",
    "devDependencies": {
-      "@silvermine/chai-strictly-equal": "1.1.0",
+      "@silvermine/chai-strictly-equal": "1.1.1",
       "@silvermine/eslint-config": "3.0.1",
       "@silvermine/standardization": "2.0.0",
       "@silvermine/typescript-config": "0.10.0",

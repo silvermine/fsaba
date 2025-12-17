@@ -16,7 +16,17 @@
 
 ## What?
 
+FSABA (Fine-grained Subject-Action-Based Authorization) is a policy-based authorization
+library. It allows you to define roles with policies that specify what actions subjects
+(users) can perform on which resources, with optional conditions for fine-grained access
+control.
+
 ## Why?
+
+Building authorization logic from scratch is error-prone and often leads to inconsistent
+access control across an application. FSABA provides a declarative, testable approach to
+authorization that separates policy definitions from application code, making it easier to
+reason about and audit permissions.
 
 ## License
 

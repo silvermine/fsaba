@@ -301,6 +301,75 @@ export const BUDGET_VIEWER_ACCOUNTING_HEAD: Claims = {
    ],
 };
 
+export const VIEW_NON_CONFIDENTIAL_BLUEPRINTS: RoleDefinition = {
+   roleID: 'view-non-confidential-blueprints',
+   policies: [
+      {
+         effect: PolicyEffect.Allow,
+         actions: [ 'blueprints:View' ],
+         resources: [ 'blueprints:*' ],
+         conditions: [
+            {
+               type: PolicyConditionMatchType.StringMatches,
+               field: 'blueprints:OwningDepartment',
+               value: '{CONTEXT_VALUE:department}',
+            },
+            {
+               type: PolicyConditionMatchType.StringDoesNotMatchIfExists,
+               field: 'blueprints:Classification',
+               value: 'confidential',
+            },
+         ],
+      },
+   ],
+};
+
+export const VIEW_ALL_BLUEPRINTS: RoleDefinition = {
+   roleID: 'view-all-blueprints',
+   policies: [
+      {
+         effect: PolicyEffect.Allow,
+         actions: [ 'blueprints:View' ],
+         resources: [ 'blueprints:*' ],
+         conditions: [
+            {
+               type: PolicyConditionMatchType.StringMatches,
+               field: 'blueprints:OwningDepartment',
+               value: '{CONTEXT_VALUE:department}',
+            },
+         ],
+      },
+   ],
+};
+
+export const BLUEPRINT_VIEWER_ENGINEERING_ID = 'e5f6a7b8-c9d0-1234-ef01-567890123456';
+
+export const BLUEPRINT_VIEWER_ENGINEERING: Claims = {
+   subjectID: BLUEPRINT_VIEWER_ENGINEERING_ID,
+   roles: [
+      { roleID: VIEW_NON_CONFIDENTIAL_BLUEPRINTS.roleID, contextValue: { department: 'engineering' } },
+   ],
+};
+
+export const BLUEPRINT_VIEWER_ENGINEERING_ALL_ID = 'f6a7b8c9-d0e1-2345-f012-678901234567';
+
+export const BLUEPRINT_VIEWER_ENGINEERING_ALL: Claims = {
+   subjectID: BLUEPRINT_VIEWER_ENGINEERING_ALL_ID,
+   roles: [
+      { roleID: VIEW_ALL_BLUEPRINTS.roleID, contextValue: { department: 'engineering' } },
+   ],
+};
+
+export const BLUEPRINT_VIEWER_MULTI_DEPT_ID = 'a7b8c9d0-e1f2-3456-0123-789012345678';
+
+export const BLUEPRINT_VIEWER_MULTI_DEPT: Claims = {
+   subjectID: BLUEPRINT_VIEWER_MULTI_DEPT_ID,
+   roles: [
+      { roleID: VIEW_NON_CONFIDENTIAL_BLUEPRINTS.roleID, contextValue: { department: 'engineering' } },
+      { roleID: VIEW_NON_CONFIDENTIAL_BLUEPRINTS.roleID, contextValue: { department: 'manufacturing' } },
+   ],
+};
+
 export const ALL_ROLES = [
    ADMINISTER_OWN_AUTH,
    ADMINISTER_OTHER_AUTH,
@@ -310,4 +379,6 @@ export const ALL_ROLES = [
    ADMINISTER_ORG_BUSINESS_ACCOUNTS_CONJUNCTIVE,
    ADMINISTER_ORG_BUSINESS_ACCOUNTS_ROOT_ARRAY,
    VIEW_BUDGET,
+   VIEW_NON_CONFIDENTIAL_BLUEPRINTS,
+   VIEW_ALL_BLUEPRINTS,
 ];

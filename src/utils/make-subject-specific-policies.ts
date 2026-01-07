@@ -1,3 +1,4 @@
+import { isStringMap, StringMap } from '@silvermine/toolbox';
 import {
    isPolicyConditionConjunctionAllOf,
    isPolicyConditionConjunctionAnyOf,
@@ -60,11 +61,20 @@ function makeSubjectConditions(tokenReplacer: (s: string) => string, cond: Reado
    throw new Error(`Unreachable: ${typeof cond} (${Object.getOwnPropertyNames(cond)})`);
 }
 
-function makePolicyID(subjectID: string, roleID: string, policyIndex: number, contextValue?: string): string {
+function makePolicyID(subjectID: string, roleID: string, policyIndex: number, contextValue?: string | StringMap): string {
    const parts = [ `${roleID}[${policyIndex}]`, subjectID ];
 
    if (contextValue) {
-      parts.push(contextValue);
+      if (isStringMap(contextValue)) {
+         const sortedPairs = Object.keys(contextValue)
+            .sort()
+            .map((k) => { return `${k}=${contextValue[k]}`; })
+            .join(';');
+
+         parts.push(sortedPairs);
+      } else {
+         parts.push(contextValue);
+      }
    }
 
    return parts.join('|');

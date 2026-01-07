@@ -1,4 +1,4 @@
-import { StringMap } from '@silvermine/toolbox';
+import { hasDefined, StringMap } from '@silvermine/toolbox';
 import { isPolicyConditionConjunctionAllOf, isPolicyConditionConjunctionAnyOf, isPolicyConditionMatcher, PolicyCondition } from '..';
 import { PolicyConditionMatcher, PolicyConditionMatchType } from '../fsaba-types';
 import stringMatchesPattern from './string-matches-pattern';
@@ -29,6 +29,14 @@ function singleConditionSatisfied(cond: PolicyCondition, context: StringMap): bo
    throw new Error(`Unreachable: ${typeof cond} (${Object.getOwnPropertyNames(cond)})`);
 }
 
+function ifExists(context: StringMap, field: string, callback: (value: string) => boolean): boolean {
+   if (!hasDefined(context, field)) {
+      return true;
+   }
+
+   return callback(context[field]);
+}
+
 /**
  * EXPORTED ONLY FOR TESTING
  */
@@ -39,6 +47,16 @@ export function matcherSatisfied(matcher: PolicyConditionMatcher, context: Strin
       }
       case PolicyConditionMatchType.StringDoesNotMatch: {
          return !stringMatchesPattern(matcher.value, context[matcher.field]);
+      }
+      case PolicyConditionMatchType.StringMatchesIfExists: {
+         return ifExists(context, matcher.field, (value) => {
+            return stringMatchesPattern(matcher.value, value);
+         });
+      }
+      case PolicyConditionMatchType.StringDoesNotMatchIfExists: {
+         return ifExists(context, matcher.field, (value) => {
+            return !stringMatchesPattern(matcher.value, value);
+         });
       }
       default: {
          return false;

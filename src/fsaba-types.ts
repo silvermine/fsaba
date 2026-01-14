@@ -66,6 +66,23 @@ export enum PolicyConditionMatchType {
     */
    StringDoesNotMatch = 'string-does-not-match',
 
+   /**
+    * Evaluate the value as a string, seeing if it matches the string in the condition.
+    * If the field is missing from the context, the condition passes automatically.
+    * Like actions and resources, a string-matches-if-exists condition allows for a '*' as
+    * a wildcard.
+    */
+   StringMatchesIfExists = 'string-matches-if-exists',
+
+   /**
+    * Evaluates the value as a string, negating the regular string match. That is, the
+    * condition "passes" if the string value from the context fails to match the string in
+    * the condition. If the field is missing from the context, the condition passes
+    * automatically. Like actions and resources, a string-does-not-match-if-exists
+    * condition allows for a '*' as a wildcard.
+    */
+   StringDoesNotMatchIfExists = 'string-does-not-match-if-exists',
+
 }
 
 

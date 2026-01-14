@@ -236,6 +236,140 @@ export const ORG_BUSINESS_ACCOUNT_ADMIN_ROOT_ARRAY: Claims = {
    ],
 };
 
+export const VIEW_BUDGET: RoleDefinition = {
+   roleID: 'view-budget',
+   policies: [
+      {
+         effect: PolicyEffect.Allow,
+         actions: [ 'budget:View' ],
+         resources: [ 'budget:*' ],
+         conditions: [
+            {
+               type: PolicyConditionMatchType.StringMatches,
+               field: 'budget:OwningDepartment',
+               value: '{CONTEXT_VALUE:department}',
+            },
+            {
+               type: PolicyConditionMatchType.StringMatches,
+               field: 'budget:ProductLine',
+               value: '{CONTEXT_VALUE:product}',
+            },
+         ],
+      },
+   ],
+};
+
+export const BUDGET_VIEWER_SINGLE_ID = 'a1b2c3d4-e5f6-7890-abcd-ef1234567890';
+
+export const BUDGET_VIEWER_SINGLE: Claims = {
+   subjectID: BUDGET_VIEWER_SINGLE_ID,
+   roles: [
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: 'kazoo', department: 'manufacturing' } },
+   ],
+};
+
+export const BUDGET_VIEWER_MFG_HEAD_ID = 'b2c3d4e5-f6a7-8901-bcde-f23456789012';
+
+export const BUDGET_VIEWER_MFG_HEAD: Claims = {
+   subjectID: BUDGET_VIEWER_MFG_HEAD_ID,
+   roles: [
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: 'kazoo', department: 'manufacturing' } },
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: 'rubber-duck', department: 'manufacturing' } },
+   ],
+};
+
+export const BUDGET_VIEWER_KAZOO_PM_ID = 'c3d4e5f6-a7b8-9012-cdef-345678901234';
+
+export const BUDGET_VIEWER_KAZOO_PM: Claims = {
+   subjectID: BUDGET_VIEWER_KAZOO_PM_ID,
+   roles: [
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: 'kazoo', department: 'manufacturing' } },
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: 'kazoo', department: 'marketing' } },
+   ],
+};
+
+export const BUDGET_VIEWER_ACCOUNTING_HEAD_ID = 'd4e5f6a7-b8c9-0123-def0-456789012345';
+
+export const BUDGET_VIEWER_ACCOUNTING_HEAD: Claims = {
+   subjectID: BUDGET_VIEWER_ACCOUNTING_HEAD_ID,
+   roles: [
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: 'kazoo', department: 'manufacturing' } },
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: 'rubber-duck', department: 'manufacturing' } },
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: 'kazoo', department: 'marketing' } },
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: 'rubber-duck', department: 'marketing' } },
+      { roleID: VIEW_BUDGET.roleID, contextValue: { product: '*', department: 'office' } },
+   ],
+};
+
+export const VIEW_NON_CONFIDENTIAL_BLUEPRINTS: RoleDefinition = {
+   roleID: 'view-non-confidential-blueprints',
+   policies: [
+      {
+         effect: PolicyEffect.Allow,
+         actions: [ 'blueprints:View' ],
+         resources: [ 'blueprints:*' ],
+         conditions: [
+            {
+               type: PolicyConditionMatchType.StringMatches,
+               field: 'blueprints:OwningDepartment',
+               value: '{CONTEXT_VALUE:department}',
+            },
+            {
+               type: PolicyConditionMatchType.StringDoesNotMatchIfExists,
+               field: 'blueprints:Classification',
+               value: 'confidential',
+            },
+         ],
+      },
+   ],
+};
+
+export const VIEW_ALL_BLUEPRINTS: RoleDefinition = {
+   roleID: 'view-all-blueprints',
+   policies: [
+      {
+         effect: PolicyEffect.Allow,
+         actions: [ 'blueprints:View' ],
+         resources: [ 'blueprints:*' ],
+         conditions: [
+            {
+               type: PolicyConditionMatchType.StringMatches,
+               field: 'blueprints:OwningDepartment',
+               value: '{CONTEXT_VALUE:department}',
+            },
+         ],
+      },
+   ],
+};
+
+export const BLUEPRINT_VIEWER_ENGINEERING_ID = 'e5f6a7b8-c9d0-1234-ef01-567890123456';
+
+export const BLUEPRINT_VIEWER_ENGINEERING: Claims = {
+   subjectID: BLUEPRINT_VIEWER_ENGINEERING_ID,
+   roles: [
+      { roleID: VIEW_NON_CONFIDENTIAL_BLUEPRINTS.roleID, contextValue: { department: 'engineering' } },
+   ],
+};
+
+export const BLUEPRINT_VIEWER_ENGINEERING_ALL_ID = 'f6a7b8c9-d0e1-2345-f012-678901234567';
+
+export const BLUEPRINT_VIEWER_ENGINEERING_ALL: Claims = {
+   subjectID: BLUEPRINT_VIEWER_ENGINEERING_ALL_ID,
+   roles: [
+      { roleID: VIEW_ALL_BLUEPRINTS.roleID, contextValue: { department: 'engineering' } },
+   ],
+};
+
+export const BLUEPRINT_VIEWER_MULTI_DEPT_ID = 'a7b8c9d0-e1f2-3456-0123-789012345678';
+
+export const BLUEPRINT_VIEWER_MULTI_DEPT: Claims = {
+   subjectID: BLUEPRINT_VIEWER_MULTI_DEPT_ID,
+   roles: [
+      { roleID: VIEW_NON_CONFIDENTIAL_BLUEPRINTS.roleID, contextValue: { department: 'engineering' } },
+      { roleID: VIEW_NON_CONFIDENTIAL_BLUEPRINTS.roleID, contextValue: { department: 'manufacturing' } },
+   ],
+};
+
 export const ALL_ROLES = [
    ADMINISTER_OWN_AUTH,
    ADMINISTER_OTHER_AUTH,
@@ -244,4 +378,7 @@ export const ALL_ROLES = [
    ADMINISTER_OWN_MONEY,
    ADMINISTER_ORG_BUSINESS_ACCOUNTS_CONJUNCTIVE,
    ADMINISTER_ORG_BUSINESS_ACCOUNTS_ROOT_ARRAY,
+   VIEW_BUDGET,
+   VIEW_NON_CONFIDENTIAL_BLUEPRINTS,
+   VIEW_ALL_BLUEPRINTS,
 ];

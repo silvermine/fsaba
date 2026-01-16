@@ -274,6 +274,18 @@ export interface IsAllowedOpts {
    ignoreConditions: boolean;
 }
 
+export interface HasPolicyGrantingOpts {
+
+   /**
+    * An optional resource prefix pattern (e.g. 'budgets:kazoo/*'). If provided, the
+    * authorizer checks if any policy grants the action on a resource that matches this
+    * prefix.
+    *
+    * Note: This must end with a wildcard (`*`) and cannot contain wildcards elsewhere.
+    */
+   resourcePrefixPattern?: string;
+}
+
 /**
  * A subject authorizer is used to determine what actions each subject can perform.
  */
@@ -287,6 +299,73 @@ export interface ISubjectAuthorizer {
     * is available.
     */
    isAllowed(action: string, resource: string, opts?: Partial<IsAllowedOpts>): boolean;
+
+   /**
+    * Perform an early check to see if the user has a policy allowing them to perform the
+    * provided action at all, with an optional resource prefix. This is useful for APIs to
+    * perform an early check before doing expensive processing to load any data needed to
+    * determine if the user has access to perform the action.
+    *
+    * This does not replace the need to call `isAllowed` to determine if the user has
+    * access to perform the action. This is a tool that can be used to reduce the
+    * information disclosed (e.g. via timing-based probing) to users who don't have access
+    * to perform an action at all.
+    *
+    * Scenario: A request is made for `budgets/it-dept/fy2025/q1`. Your code needs to:
+    * (1) validate query params, and (2) load the IT Department budget for Q1 of FY2025
+    * to see who has permission to view it (before an `isAllowed` call could be made). If
+    * the query params seem invalid, or if there is no budget for those params, you'd
+    * return a "Bad Request" or "Not Found" response. But, if the user doesn't have
+    * `budget:View` for any combination of departments, etc, then there's no reason to
+    * even perform those steps and potentially expose information through the "Bad
+    * Request" or "Not Found" responses.
+    *
+    * Using this method, you could follow this flow:
+    *
+    *    1. hasPolicyGranting('budget:View') - if they don't have this, then stop right
+    *       there; if they do have a policy granting them view rights to a budget, they
+    *       might not be for this budget, but you can now continue your flow
+    *    2. Validate query params; may be okay to return Bad Response depending on your
+    *       security requirements
+    *    3. Look up the requested budget; may or may not be okay to return a 404 Not Found
+    *       depending on your security requirements
+    *    4. If you did find that budget item, now, check if they have permission to view
+    *       this budget with isAllowed
+    *
+    * In pseudocode, this might look like:
+    *
+    * ```
+    * // A request is made for budgets/it-dept/fy2025/q1.
+    * // 1. Check if the user has ANY policy granting 'budget:View'
+    * if (!authorizer.hasPolicyGranting('budget:View')) {
+    *    return 403 Forbidden;
+    * }
+    *
+    * // 2. Validate query params
+    * if (!params.isValid()) {
+    *    // Possibly safe to let the user know the request is invalid because we know
+    *    // they have SOME view rights
+    *    return 400 Bad Request;
+    * }
+    *
+    * // 3. Load the specific resource
+    * const budget = await loadBudget('it-dept', 'fy2025', 'q1');
+    *
+    * if (!budget) {
+    *    // Returning a 403 Forbidden vs 404 Not Found here depends on your security
+    *    // requirements.
+    *    return 403 Forbidden;
+    * }
+    *
+    * // 4. Perform final check for this specific budget
+    * if (!authorizer.isAllowed('budget:View', budget.id, { context: budget.context })) {
+    *    return 403 Forbidden;
+    * }
+    *
+    * return 200 OK;
+    * ```
+    */
+   hasPolicyGranting(action: string, opts?: HasPolicyGrantingOpts): boolean;
 
 }
 

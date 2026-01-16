@@ -7,9 +7,11 @@ import {
    PolicyEffect,
    PolicyWithID,
    ISubjectAuthorizerOpts,
+   HasPolicyGrantingOpts,
 } from './fsaba-types';
 import isAllowed from './utils/is-allowed';
 import makeSubjectSpecificPolicies from './utils/make-subject-specific-policies';
+import hasPolicyGranting from './utils/has-policy-granting';
 
 export class SubjectAuthorizer implements ISubjectAuthorizer {
 
@@ -41,6 +43,10 @@ export class SubjectAuthorizer implements ISubjectAuthorizer {
 
    public isAllowed(action: string, resource: string, opts?: Partial<IsAllowedOpts>): boolean {
       return isAllowed(this._policies, action, resource, opts);
+   }
+
+   public hasPolicyGranting(action: string, opts?: HasPolicyGrantingOpts): boolean {
+      return hasPolicyGranting(this._policies, action, opts);
    }
 
 }

@@ -264,6 +264,13 @@ export interface IAuthorizerFactory {
  */
 export interface IsAllowedOpts {
    context: StringMap;
+
+   /**
+    * When true, policy conditions are bypassed, only action and resource patterns are
+    * evaluated. Useful for UI scenarios where you need to know if a user *could* have
+    * access to an action (e.g., showing a button) before the runtime context required by
+    * conditions is available.
+    */
    ignoreConditions: boolean;
 }
 
@@ -276,9 +283,8 @@ export interface ISubjectAuthorizer {
     * Is the subject allowed to perform this action on the given resource? Optionally,
     * provide a context that may be evaluated by policy conditions. In rare cases, you may
     * want to ignore conditions when determining if the user would have access to an
-    * action.
-    *
-    * TODO: document more on when you'd ignore conditions.
+    * action—for example, to decide whether to render a UI element before runtime context
+    * is available.
     */
    isAllowed(action: string, resource: string, opts?: Partial<IsAllowedOpts>): boolean;
 

@@ -53,16 +53,18 @@ export enum PolicyConditionMatchType {
 
    /**
     * Evaluate the value as a string, seeing if it matches the string in the condition.
-    * Like actions and resources, a string-matches condition allows for a '*' as a
-    * wildcard.
+    * If the field is missing from the context, there is no value to match. The condition
+    * fails, even when its value is a bare wildcard. Like actions and resources, a
+    * string-matches condition allows for a '*' as a wildcard.
     */
    StringMatches = 'string-matches',
 
    /**
     * Evaluates the value as a string, negating the regular string match. That is, the
     * condition "passes" if the string value from the context fails to match the string in
-    * the condition. Like actions and resources, a string-does-not-match condition allows
-    * for a '*' as a wildcard.
+    * the condition. If the field is missing from the context, there is no value to match.
+    * The condition passes, even when its value is a bare wildcard. Like actions and
+    * resources, a string-does-not-match condition allows for a '*' as a wildcard.
     */
    StringDoesNotMatch = 'string-does-not-match',
 

@@ -1,4 +1,13 @@
-export default function stringMatchesPattern(pattern: string, value: string): boolean {
+import { isString } from '@silvermine/toolbox';
+
+export default function stringMatchesPattern(pattern: string, value: string | undefined): boolean {
+   if (!isString(value)) {
+      // No pattern matches a value that does not exist, not even a bare wildcard. Without
+      // this guard, `RegExp.test` converts the value to the string "undefined". A pattern
+      // such as '*' then matches that string.
+      return false;
+   }
+
    if (pattern.indexOf('*') === -1) {
       // Short-circuit to avoid overhead of RegExp creation when not needed.
       return pattern === value;

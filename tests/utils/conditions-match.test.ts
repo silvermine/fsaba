@@ -20,7 +20,7 @@ describe('matcherSatisfied', () => {
          expect(matcherSatisfied(matcher, context)).to.strictlyEqual(false);
       });
 
-      it('returns true when field is missing from context and the value is a wildcard', () => {
+      it('returns false when field is missing from context and the value is a wildcard', () => {
          const matcher = {
             type: PolicyConditionMatchType.StringMatches,
             field: 'department',
@@ -29,7 +29,7 @@ describe('matcherSatisfied', () => {
 
          const context = { product: 'kazoo' };
 
-         expect(matcherSatisfied(matcher, context)).to.strictlyEqual(true);
+         expect(matcherSatisfied(matcher, context)).to.strictlyEqual(false);
       });
 
       it('returns true when field is present and matches', () => {
@@ -94,7 +94,7 @@ describe('matcherSatisfied', () => {
          expect(matcherSatisfied(matcher, context)).to.strictlyEqual(true);
       });
 
-      it('returns false when field is missing from context and the value is a wildcard', () => {
+      it('returns true when field is missing from context and the value is a wildcard', () => {
          const matcher = {
             type: PolicyConditionMatchType.StringDoesNotMatch,
             field: 'department',
@@ -103,7 +103,7 @@ describe('matcherSatisfied', () => {
 
          const context = { product: 'kazoo' };
 
-         expect(matcherSatisfied(matcher, context)).to.strictlyEqual(false);
+         expect(matcherSatisfied(matcher, context)).to.strictlyEqual(true);
       });
 
       it('returns false when field is present and matches', () => {

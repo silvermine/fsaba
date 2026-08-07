@@ -105,6 +105,15 @@ describe('stringMatchesPattern', () => {
       expect(stringMatchesPattern('*', '')).to.eql(false);
    });
 
+   it('returns false for every pattern when the value does not exist', () => {
+      expect(stringMatchesPattern('*', undefined)).to.eql(false);
+      expect(stringMatchesPattern('some/*', undefined)).to.eql(false);
+      expect(stringMatchesPattern('some/pattern', undefined)).to.eql(false);
+      // patterns that the string "undefined" satisfies
+      expect(stringMatchesPattern('unde*', undefined)).to.eql(false);
+      expect(stringMatchesPattern('undefined', undefined)).to.eql(false);
+   });
+
    it('returns false when the value does not match the pattern', () => {
       // TODO: insert more tests
    });
